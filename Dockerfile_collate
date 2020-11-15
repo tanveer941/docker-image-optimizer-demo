@@ -1,0 +1,14 @@
+FROM python:3.8
+
+RUN apt-get update && \
+    apt-get install -y \
+    apache2 \
+    curl \
+    git && \
+    rm -rf /var/lib/apt/lists/*
+
+ADD . /app
+WORKDIR /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+ENTRYPOINT ["python", "hello.py"]
